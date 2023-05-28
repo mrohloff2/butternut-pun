@@ -1,0 +1,16 @@
+
+def modifyDevice(devices, deviceName, validIP, updatedType):  #updates our dictionary with the new information requested
+    newType = input("What is the devices new type?: ")
+    devices[deviceName]['hostname'] = newType
+    newIP = input("What is the devices new IP:? ")
+devices[deviceName]['hostname'] = newType
+    for device in devices.items():
+        print(device)
+        if device['hostname'] != deviceName:
+            print(device['hostname'])
+            print("this interface doesnt match please try again")
+            continue
+        elif device['hostname'] == deviceName:
+            device['mgmtip'] = validIP
+            interface['type'] = newType
+    return devices
