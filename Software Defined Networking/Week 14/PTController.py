@@ -1,4 +1,6 @@
 import json
+from time import sleep
+
 import requests
 
 net_controller = {"name": "localhost:58000",
@@ -88,8 +90,31 @@ controller = net_controller["name"] #URL from Dictionary defined above
 username = net_controller["username"]  #Username from Dictionary defined above
 password = net_controller["password"]   #Password from Dictionary defined above
 
+serviceTicket = get_ticket(controller,username,password)
+#print(serviceTicket)
 
+hosts=get_hosts(controller,serviceTicket)
+print(hosts)
+for i in hosts:
+    if i["hostType"] == "Pc":
+        print(i["hostName"])
+        print(i["hostIp"])
 
+    #print(i)
+
+devices=get_devices(controller,serviceTicket)
+for i in devices:
+    print(i["hostname"], "    ", i['id'], "    ", i["ipAddresses"])
+    dev_id=i["id"]
+    device = get_single_device(controller, serviceTicket, dev_id)
+    print(device)
+print(devices)
+
+source_ip = "192.168.200.1"
+destination_ip = "192.168.2.100"
+
+flow = run_flow_analysis(controller, serviceTicket, source_ip, destination_ip)
+print(flow)
 
 
                   

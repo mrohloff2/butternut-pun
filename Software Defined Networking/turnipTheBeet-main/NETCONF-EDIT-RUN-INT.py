@@ -37,6 +37,9 @@ xmlInt = xmlInt.replace("%addr%", "172.16.1.2")
 xmlInt = xmlInt.replace("%intName%", "GigabitEthernet")
 xmlInt = xmlInt.replace("%intNum%", "2")
 xmlInt = xmlInt.replace("%mask%", "255.255.255.0")
+
+print(type(xmlInt))
+
 print(xmlInt)
 
 

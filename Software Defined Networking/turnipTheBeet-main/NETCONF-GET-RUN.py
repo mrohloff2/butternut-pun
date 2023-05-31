@@ -1,6 +1,3 @@
-
-
-
 import xml.etree.ElementTree as ET
 import xmltodict
 import xml.dom.minidom
@@ -8,8 +5,8 @@ from lxml import etree
 from ncclient import manager
 from collections import OrderedDict
 
-router = {"host": "10.10.20.175", "port" : "830",
-          "username":"cisco","password":"cisco"}
+router = {"host": "10.10.20.176", "port": "830",
+          "username": "cisco", "password": "cisco"}
 
 netconf_filter = """
 <filter>
@@ -18,23 +15,23 @@ netconf_filter = """
     </interfaces>
 </filter>"""
 
-with manager.connect(host=router['host'],port=router['port'],username=router['username'],password=router['password'],hostkey_verify=False) as m:
-
-    netconf_reply = m.get_config(source = 'running', filter = netconf_filter)
+with manager.connect(host=router['host'], port=router['port'], username=router['username'], password=router['password'],
+                     hostkey_verify=False) as m:
+    netconf_reply = m.get_config(source='running', filter=netconf_filter)
 
 print(xml.dom.minidom.parseString(netconf_reply.xml).toprettyxml())
 
 print("#" * 40)
 
-    #Parse returned XML to Dictionary
+# Parse returned XML to Dictionary
 
 netconf_data = xmltodict.parse(netconf_reply.xml)["rpc-reply"]["data"]
 
 print(netconf_data)
 
-print("d" *40)
+print("d" * 40)
 
-    #Create List of Interfaces
+# Create List of Interfaces
 
 interfaces = netconf_data["interfaces"]["interface"]
 
@@ -44,4 +41,3 @@ print("I" * 40)
 
 for interface in interfaces:
     print(interface)
-          
