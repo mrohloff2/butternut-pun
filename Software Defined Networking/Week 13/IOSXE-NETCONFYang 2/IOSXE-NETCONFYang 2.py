@@ -81,6 +81,7 @@ def changeInt(interface, deviceinfo, intIP, mask):
     interface = interface.replace("%mask%", mask)
 
     with manager.connect(host=deviceinfo['host'], port=deviceinfo['port'], username=deviceinfo['username'], password=deviceinfo['password'],hostkey_verify=False) as m:
+
         netconf_reply = m.edit_config(target='running', config=interface)
 
 
